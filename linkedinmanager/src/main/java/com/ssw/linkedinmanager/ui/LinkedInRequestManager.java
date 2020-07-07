@@ -95,6 +95,7 @@ public class LinkedInRequestManager {
 
         final WebView linkedInWebView = dialog.findViewById(R.id.linkedInWebView);
         WebSettings settings = linkedInWebView.getSettings();
+        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         try {
             settings.setAllowFileAccess(false);
         } catch (Exception ignored) {
@@ -129,6 +130,9 @@ public class LinkedInRequestManager {
                 }
             }
         });
+        linkedInWebView.clearHistory();
+        linkedInWebView.clearFormData();
+        linkedInWebView.clearCache(true);
         linkedInWebView.loadUrl(URL);
         dialog.show();
     }
