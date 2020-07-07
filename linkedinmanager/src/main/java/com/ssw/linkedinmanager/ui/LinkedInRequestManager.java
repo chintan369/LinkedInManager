@@ -119,6 +119,10 @@ public class LinkedInRequestManager {
                     dismissAuthenticateView();
                     return false;   
                 }
+                else if(url.startsWith("https://www.linkedin.com/oauth/v2/login-cancel")){
+                    dismissAuthenticateView();
+                    return false;   
+                }
                 else {
                     linkedInManagerResponse.onGetCodeFailed();
                     return false;
