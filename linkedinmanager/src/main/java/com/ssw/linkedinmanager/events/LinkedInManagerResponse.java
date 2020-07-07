@@ -20,4 +20,6 @@ public interface LinkedInManagerResponse {
     void onGetEmailAddressFailed();
 
     void onGetEmailAddressSuccess(LinkedInEmailAddress linkedInEmailAddress);
+    
+    void userCancelled();
 }
