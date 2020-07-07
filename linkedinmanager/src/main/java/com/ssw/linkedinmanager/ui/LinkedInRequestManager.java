@@ -118,10 +118,12 @@ public class LinkedInRequestManager {
                 } 
                 else if(url.startsWith("https://www.linkedin.com/oauth/v2/authorization-cancel")){
                     dismissAuthenticateView();
+                    linkedInManagerResponse.userCancelled();
                     return false;   
                 }
                 else if(url.startsWith("https://www.linkedin.com/oauth/v2/login-cancel")){
                     dismissAuthenticateView();
+                    linkedInManagerResponse.userCancelled();
                     return false;   
                 }
                 else {
