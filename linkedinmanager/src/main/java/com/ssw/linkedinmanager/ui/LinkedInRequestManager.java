@@ -114,7 +114,12 @@ public class LinkedInRequestManager {
                     getAccessToken(code);
                     linkedInManagerResponse.onGetCodeSuccess(code);
                     return true;
-                } else {
+                } 
+                else if(url.startsWith("https://www.linkedin.com/oauth/v2/authorization-cancel")){
+                    dismissAuthenticateView();
+                    return false;   
+                }
+                else {
                     linkedInManagerResponse.onGetCodeFailed();
                     return false;
                 }
@@ -144,6 +149,7 @@ public class LinkedInRequestManager {
             @Override
             public void onAuthenticationFailed() {
                 linkedInManagerResponse.onGetAccessTokenFailed();
+                dismissAuthenticateView();
             }
         });
     }
@@ -170,15 +176,20 @@ public class LinkedInRequestManager {
                         linkedInUserProfile.setImageURL("");
                     }
                     linkedInManagerResponse.onGetProfileDataSuccess(linkedInUserProfile);
+                    if(this.mode == MODE_LITE_PROFILE_ONLY || this.mode == MODE_BOTH_OPTIONS){
+                        dismissAuthenticateView();
+                    }
 
                 } catch (Exception ignored) {
                     linkedInManagerResponse.onGetProfileDataFailed();
+                    dismissAuthenticateView();
                 }
             }
 
             @Override
             public void onRequestFailed() {
                 linkedInManagerResponse.onGetProfileDataFailed();
+                dismissAuthenticateView();
             }
         });
         return linkedInUserProfile;
@@ -197,15 +208,20 @@ public class LinkedInRequestManager {
 
                     linkedInEmailAddress.setEmailAddress(emailAddress);
                     linkedInManagerResponse.onGetEmailAddressSuccess(linkedInEmailAddress);
+                    if(this.mode == MODE_EMAIL_ADDRESS_ONLY){
+                        dismissAuthenticateView();
+                    }
                 } catch (Exception ignored) {
                     linkedInEmailAddress.setEmailAddress("");
                     linkedInManagerResponse.onGetEmailAddressFailed();
+                    dismissAuthenticateView();
                 }
             }
 
             @Override
             public void onFailedResponse() {
                 linkedInManagerResponse.onGetEmailAddressFailed();
+                dismissAuthenticateView();
             }
         });
         return linkedInEmailAddress;
