@@ -180,7 +180,7 @@ public class LinkedInRequestManager {
                         linkedInUserProfile.setImageURL("");
                     }
                     linkedInManagerResponse.onGetProfileDataSuccess(linkedInUserProfile);
-                    if(this.mode == MODE_LITE_PROFILE_ONLY || this.mode == MODE_BOTH_OPTIONS){
+                    if(LinkedInRequestManager.this.mode == MODE_LITE_PROFILE_ONLY || LinkedInRequestManager.this.mode == MODE_BOTH_OPTIONS){
                         dismissAuthenticateView();
                     }
 
@@ -212,7 +212,7 @@ public class LinkedInRequestManager {
 
                     linkedInEmailAddress.setEmailAddress(emailAddress);
                     linkedInManagerResponse.onGetEmailAddressSuccess(linkedInEmailAddress);
-                    if(this.mode == MODE_EMAIL_ADDRESS_ONLY){
+                    if(LinkedInRequestManager.this.mode == MODE_EMAIL_ADDRESS_ONLY){
                         dismissAuthenticateView();
                     }
                 } catch (Exception ignored) {
